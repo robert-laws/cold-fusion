@@ -1,0 +1,3 @@
+<aside>
+  This is the new sidebar custom tag...
+</aside>
