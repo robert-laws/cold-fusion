@@ -10,6 +10,12 @@
 <body>
   <cfscript>
     writeDump(application);
+
+    if(structKeyExists(session, "userName")) {
+      writeDump(Session.userName);
+    } else {
+      writeDump("Not logged in");
+    }
   </cfscript>
   <main>
     <p>CF App</p>

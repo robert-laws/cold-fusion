@@ -13,5 +13,11 @@
   <cf_sidebar>
 
   <cf_footer>
+
+  <cfdump var="#session#">
+  <hr>
+  <cfoutput>
+    #Session.userName#
+  </cfoutput>
 </body>
 </html>

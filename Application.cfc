@@ -41,4 +41,11 @@ component
   //   writeOutput("<hr/>");
   //   writeOutput(EventName);
   // }
+
+  public void function onSessionStart() 
+	{ 
+		// set some defaults whenever a new user logs on.
+		session.created 	= Now(); 
+		session.userName 	= "jjupe";
+	} 
 }
