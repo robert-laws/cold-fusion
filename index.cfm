@@ -9,7 +9,7 @@
 </head>
 <body>
   <cfscript>
-    writeDump(application);
+    // writeDump(application);
 
     // if(structKeyExists(session, "userName")) {
     //   writeDump(Session.userName);
@@ -28,10 +28,10 @@
     }
   </cfscript>
   <main>
-    <p>CF App</p>
+    <cf_sidebar pageTitle="Sample App">
 
     <cfoutput>
-      #session.userName#
+      <!--- #session.userName# --->
     </cfoutput>
 
     <!--- <cfoutput>

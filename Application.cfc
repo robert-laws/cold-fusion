@@ -14,6 +14,8 @@ component
 
 	this.mappings["/images"] = "/utilities/images"
 
+	// application.boatSiteAccent = "blue"
+
 	this.datasources = {
 		CFTrainingDSN = {
 			url = "jdbc:derby:#variables.dbPath#;create=true;MaxPooledStatements=300", 
@@ -24,6 +26,7 @@ component
   // Runs once when the application is started
   public boolean function onApplicationStart() 
 	{ 
+		application.boatSiteAccent = "blue"
     return true; 
   }
   
