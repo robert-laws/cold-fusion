@@ -12,6 +12,8 @@ component
 
 	this.datasource = "CFTrainingDSN";
 
+	this.mappings["/images"] = "/utilities/images"
+
 	this.datasources = {
 		CFTrainingDSN = {
 			url = "jdbc:derby:#variables.dbPath#;create=true;MaxPooledStatements=300", 
@@ -19,12 +21,11 @@ component
 		}
 	};
 
-  // On Application Start Method
+  // Runs once when the application is started
   public boolean function onApplicationStart() 
 	{ 
     return true; 
   }
-
   
   public void function onRequest( required string targetPage ) 
   { 
@@ -42,10 +43,11 @@ component
   //   writeOutput(EventName);
   // }
 
+	// executed when a user begins a new session
   public void function onSessionStart() 
 	{ 
 		// set some defaults whenever a new user logs on.
 		session.created 	= Now(); 
-		session.userName 	= "jjupe";
+		session.userName 	= "";
 	} 
 }

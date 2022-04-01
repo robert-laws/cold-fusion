@@ -11,16 +11,32 @@
   <cfscript>
     writeDump(application);
 
-    if(structKeyExists(session, "userName")) {
-      writeDump(Session.userName);
-    } else {
-      writeDump("Not logged in");
+    // if(structKeyExists(session, "userName")) {
+    //   writeDump(Session.userName);
+    // } else {
+    //   writeDump("Not logged in");
+    // }
+
+    uName = "bcobb";
+
+    if(uName == 'bcobb') {
+      lock type="exclusive" scope="session" timeout="20" {
+        session.created = Now(); 
+		    session.userName = uName;
+      }
+      sessionRotate();
     }
   </cfscript>
   <main>
     <p>CF App</p>
 
-    
+    <cfoutput>
+      #session.userName#
+    </cfoutput>
+
+    <!--- <cfoutput>
+      <img src='#expandPath("/images/google.png")#' />
+    </cfoutput> --->
   </main>
 </body>
 </html>
