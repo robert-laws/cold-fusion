@@ -8,11 +8,11 @@
 
   if(thisTag.executionMode == "start") {
     thisTag.children = [];
-    exit;
+    exit "exittemplate";
   }
 
   if(thisTag.executionMode == 'end') {
     request.boatMenus[attributes.menu] = thisTag.children;
-    exit;
+    exit "exittag";
   }
 </cfscript>

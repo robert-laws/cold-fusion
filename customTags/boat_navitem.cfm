@@ -8,11 +8,11 @@
 
   if(thisTag.executionMode == "start") {
     thisTag.children = [];
-    exit;
+    exit "exittemplate";
   }
 
   if(thisTag.executionMode == "end") {
-    tags = listToArray(getBaseTagList());
+    tags = getBaseTagList().listToArray();
     myTag = tags[1];
     parentTag = tags[2];
 

@@ -2,9 +2,9 @@
   <cf_boat_navitem title="Login" href="index.cfm" />
 </cf_boat_nav>
 
-<cfscript>
+<!--- <cfscript>
   request.myImportantData = "important data";
-</cfscript>
+</cfscript> --->
 
 <!DOCTYPE html>
 <html lang="en-US" dir="ltr">
@@ -12,5 +12,8 @@
   <title>App Webpage</title>
   <body>
     <h1>Webpage...</h1>
+    <cfscript>
+      // writeDump(APPLICATION.boatSidebarDataSerialized);
+    </cfscript>
   </body>
 </html>
