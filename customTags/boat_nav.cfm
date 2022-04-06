@@ -1,5 +1,5 @@
 <cfscript>
-  cfparam(name="request.boatMenus", type="struct", default={});
+  cfparam(name="REQUEST.boatMenus", type="struct", default={});
   cfparam(name="attributes.menu", type="string", default="page");
 
   if(!thisTag.hasEndTag) {

@@ -1,4 +1,6 @@
 <cfscript>
+  cfparam(name = "REQUEST.boatSidebarDataLastUpdate", type="date", default="#now()#");
+  
   if(!thisTag.hasEndTag) {
     throw(message = "Missing end tag for boat_head");
   }
@@ -13,8 +15,9 @@
     APPLICATION.boatSidebarData = deserializeJson(sidebardata.filecontent);
     APPLICATION.boatSidebarDataLastUpdate = now();
   }
-
+  
   ver = APPLICATION.boatSidebarData.build_version ?: 'v1.0.0-spring.8';
+  REQUEST.boatSidebarDataLastUpdate = now();
 </cfscript>
 
 <cfoutput>

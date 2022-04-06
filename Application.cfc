@@ -26,7 +26,13 @@ component
 		application.debugging = true;
 		application.baseUrl = "https://www.stolaf.edu/apps/robertapp/";
 		application.robertdb = "robertdb";
-		application.boatSiteTitle = "Robert App - Local Config";
+		application.boatSiteTitle = "CF App - Local Config";
+		APPLICATION.boatContactAddress = "RML 474";
+    APPLICATION.boatContactPhone = "(507) 786-3745";
+    APPLICATION.boatContactEmail = "laws@stolaf.edu";
+    APPLICATION.boatContactHours = "8am - 5pm";
+    APPLICATION.boatSitePattern = "pattern-c";
+    APPLICATION.boatSiteAccent = "navy";
 
 		return true;
 	}

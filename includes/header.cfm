@@ -1,19 +1,12 @@
 <cf_boat_nav>
-  <cf_boat_navitem title="Login" href="index.cfm" />
+  <cf_boat_navitem title="Login" href="login.cfm" />
 </cf_boat_nav>
-
-<!--- <cfscript>
-  request.myImportantData = "important data";
-</cfscript> --->
 
 <!DOCTYPE html>
 <html lang="en-US" dir="ltr">
-  <cf_boat_head />
+  <cf_boat_head>
   <title>App Webpage</title>
+  </cf_boat_head>
+  
   <body>
-    <h1>Webpage...</h1>
-    <cfscript>
-      // writeDump(APPLICATION.boatSidebarDataSerialized);
-    </cfscript>
-  </body>
-</html>
+    <cf_boat_start />
