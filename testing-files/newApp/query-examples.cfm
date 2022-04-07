@@ -17,10 +17,21 @@
   </cfscript> --->
 
   <cfscript>
-    myQuery = new Query(name = "queryUsers", datasource = "robertdb", sql = "SELECT LastName FROM tUsers WHERE FirstName LIKE :fn");
-    myQuery.addParam(name = "fn", value = "J%", cfsqltype = "cf_sql_varchar");
+    myQuery = new Query(name = "queryUsers", datasource = "campusdb", sql = "SELECT * FROM Users");
+    // myQuery = new Query(name = "queryUsers", datasource = "campusdb", sql = "SELECT LastName FROM Users WHERE FirstName LIKE :fn");
+    // myQuery.addParam(name = "fn", value = "K%", cfsqltype = "cf_sql_varchar");
     results = myQuery.execute().getResult();
     writeDump(results);
+
+    arrayOfNames = valueArray(results, "LastName");
+    writeDump(arrayOfNames);
+
+    writeDump(serializeJSON(results));
+    writeDump(serializeJSON(arrayOfNames));
+
+    cfloop(query = results) {
+      writeOutput("<p>-- #LastName#</p>");
+    }
   </cfscript>
 
    <!--- <cfquery name="allUsers">
@@ -32,6 +43,16 @@
   <cfoutput query="allUsers">
     <p>#UserID# - #FirstName#</p>
   </cfoutput> --->
+
+  <cfoutput>
+    <cfif arrayOfNames.len() GT 0>
+      <cfloop array="#arrayOfNames#" item="lastName">
+        <p>#lastName#</p>
+      </cfloop>
+    <cfelse>
+      <p>No Results...</p>
+    </cfif>
+  </cfoutput>
 
   <cfoutput query="results">
     <cfif results.RecordCount GT 0>
@@ -45,9 +66,9 @@
 
   <cfoutput>
     <cfset FirstName = "Ross" />
-    <cfquery datasource="robertdb" name="userResults">
+    <cfquery datasource="campusdb" name="userResults">
       SELECT UserID, Email, FirstName, LastName 
-      FROM tUsers
+      FROM Users
       WHERE FirstName = <cfqueryparam value = "#FirstName#" cfsqltype = "cf_sql_varchar"> 
     </cfquery>
 
@@ -63,6 +84,30 @@
           </cfloop>
         </ul>
       </cfif>
+  </cfoutput>
+
+  <cfscript>
+  // Data Types
+  firstName = "Howard"; // string
+  age = 34; // intergers
+  employee = true; // boolean
+  itemList = "pen, pencil, eraser"; // string (list)
+  arrayOfItems = ["pen", "pencil", "eraser"]; // array
+  structOfItems = {
+    pen: "ball point",
+    pencil: "mechanical",
+    eraser: "rubber"
+  }
+
+  unorderedList = "<ul>";
+  for (item in arrayOfItems) {
+    unorderedList &= "<li>" & item & "</li>";
+  }
+  unorderedList &= "</ul>";
+  </cfscript>
+
+  <cfoutput>
+    #unorderedList#
   </cfoutput>
 </body>
 </html>

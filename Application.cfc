@@ -3,9 +3,9 @@ component
 	// local development setup
 	// database connection
 	variables.dbPath = expandPath("/resources/database/Derby/");
-	this.datasource = "robertdb";
+	this.datasource = "campusdb";
 	this.datasources = {
-		robertdb = {
+		campusdb = {
 			url = "jdbc:derby:#variables.dbPath#;create=true;MaxPooledStatements=300",
 			driver = "Apache Derby Embedded"
 		}
@@ -15,7 +15,7 @@ component
 
 	setting enablecfoutputonly = false;
 
-	this.name = "robertApp";
+	this.name = "campusApp";
 	this.clientManagement = true;
 	this.sessionManagement = true;
 	this.setClientCookie = true;
@@ -25,7 +25,7 @@ component
 	public boolean function onApplicationStart() {
 		application.debugging = true;
 		application.baseUrl = "https://www.stolaf.edu/apps/robertapp/";
-		application.robertdb = "robertdb";
+		application.campusdb = "campusdb";
 		application.boatSiteTitle = "CF App - Local Config";
 		APPLICATION.boatContactAddress = "RML 474";
     APPLICATION.boatContactPhone = "(507) 786-3745";
