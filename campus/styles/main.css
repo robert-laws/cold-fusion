@@ -1,10 +1,340 @@
-.u-visual-hide {
-  border: 0;
-  clip: rect(0 0 0 0);
-  height: 1px;
-  margin: -1px;
-  overflow: hidden;
-  padding: 0;
+/* TOP NAVBAR */
+.top-nav {
+  width: 100%;
+  height: 45px;
+  background-color: var(--color-black);
+  padding: 0 2rem;
+
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: stretch;
+  justify-content: space-between;
+}
+
+.top-nav .resources-nav {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+
+.top-nav .resources-nav .menu-item {
+  margin: 0 0.5rem;
+}
+
+.tools-nav {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.tools-nav .tools-nav__support,
+.tools-nav .tools-nav__search {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.tools-nav .tools-nav__support {
+  background-color: var(--color-grey-darker);
+  padding: 0 1rem;
+}
+
+.tools-nav .tools-nav__search {
+  margin: 0 1rem;
+}
+
+.tools-nav .tools-nav__search input {
+  background-color: var(--color-grey-darker);
+  border: none;
+  border-radius: 0.2rem;
+  padding: 0.3rem 0.5rem;
+  font-size: 0.9rem;
+  color: var(--color-white);
+}
+
+.site-header {
+  background-color: var(--color-white);
+  width: 100%;
+  height: 100px;
+
+  disp
+}
+
+.site-header .l-wrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+}
+
+.l-wrapper {
+  height: 100%;
+  width: 1200px;
+  margin: 0 auto;
+}
+
+.site-header .logo {
+  height: 100px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 7;
+}
+
+.site-header .logo a {
+  background-image: url('../images/stolaf-logo-one-line-light-bg.png');
+  height: 100px;
+  width: 290px;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: contain;
+  transition: all .15s ease-in-out;
+}
+
+.standard-page-hero {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: var(--color-grey-dark);
+  position: relative;
+}
+
+.hero__pattern {
   position: absolute;
-  width: 1px;
+  top: 0%;
+  right: 0;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.pattern--background {
+  display: block;
+}
+
+.pattern--background img {
+  filter: invert();
+}
+
+.standard-page-hero__inner {
+  padding: 0 2rem;
+}
+
+.standard-page-hero h1 {
+  color: var(--color-white);
+  font-size: 4.5rem;
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 2rem 0;
+  max-width: 50%;
+}
+
+.sidebar--horizontal {
+  background-color: var(--color-gold);
+  height: 45px;
+  margin-bottom: 2.5rem;
+}
+
+.sidebar--content {
+  width: 1200px;
+  margin: 0 auto;
+
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.sidebar--content a {
+  flex: 1;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: bold;
+  border-left: 1px solid var(--color-white);
+  padding: 1rem 0;
+  color: var(--color-black);
+  text-decoration: none;
+  text-transform: uppercase;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.sidebar--content a:hover {
+  color: var(--color-white);
+  background-color: var(--color-black);
+}
+
+.sidebar--content a:hover svg {
+  filter: invert();
+  transition: filter 0.3s ease-in-out;
+}
+
+.sidebar--content a:last-child {
+  border-right: 1px solid var(--color-white);
+} 
+
+.sidebar--content a svg {
+  height: 100%;
+  transition: filter 0.3s ease-in-out;
+  margin-right: 0.5rem;
+}
+
+.breadcrumbs {
+  display: flex;
+  flex-flow: row nowrap;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.9rem;
+  margin-bottom: 2rem;
+}
+
+.breadcrumbs li::after {
+  padding-right: 0.2rem;
+  content: " /";
+}
+
+.breadcrumbs li:last-child {
+  font-weight: bold;
+}
+
+.breadcrumbs li:last-child::after {
+  content: "";
+}
+
+.page-content {
+  width: 800px;
+  margin: 0 auto;
+}
+
+.page-content p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  margin-bottom: 2rem;
+}
+
+.site-footer {
+  background-color: var(--color-black);
+  background-image: url('../images/lion-grey-darker.svg');
+  background-repeat: no-repeat;
+  background-position: 100% 0;
+  overflow: hidden;
+  width: 100%;
+  padding: 4rem 0 0;
+  color: var(--color-white);
+}
+
+.site-footer__inner {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.site-footer__inner div {
+  flex: 1;
+}
+
+.site-footer__links {
+  font-weight: bold;
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.site-footer__links a:first-child {
+  margin-right: 1rem;
+}
+
+.site-footer__tagline {
+  max-width: 240px;
+}
+
+.site-footer__contact, 
+.site-footer__sub {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+
+.site-footer__contact address {
+  font-style: normal;
+  margin-bottom: 1rem;
+}
+
+.site-footer__nav-legal-list li {
+  margin-bottom: 0.8rem;
+}
+
+.site-footer__nav-legal-list a,
+.site-footer__links-secondary a {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+}
+
+.site-footer__support > * {
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+.site-footer__btn {
+  display: inline-block;
+  color: var(--color-black);
+  background-color: var(--color-gold);
+  border-radius: 0.12rem;
+  padding: 1rem;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  font-size: 0.9rem;
+  transition: all 0.15s ease-in-out;
+}
+
+.site-footer__btn:hover {
+  background-color: var(--color-black);
+  color: var(--color-gold);
+  transition: all 0.15s ease-in-out;
+}
+
+.site-footer__copyright,
+.site-footer__privacy {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+}
+
+.site-footer__nav {
+  background-color: var(--color-lighter-black);
+  margin-top: 2.5rem;
+  padding: 0.5rem 0 1rem;
+  position: relative;
+}
+
+.site-footer__nav::before {
+  content: "";
+  border-left: 400px solid transparent;
+  border-right: 1200px solid transparent;
+  border-bottom: 40px solid #2f2c2c;
+  position: absolute;
+  top: -32px;
+  left: -170px;
+  width: 0;
+}
+
+.site-footer__nav--wrapper {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.site-footer__nav-icon-shield svg {
+  /* filter: invert(); */
+  fill: var(--color-gold);
+}
+
+.site-footer__nav-list {
+  padding-top: 0.1rem;
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 1rem;
+}
+
+.site-footer__nav-list a {
+  font-size: 0.9rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-family: Arial, Helvetica, sans-serif;
 }

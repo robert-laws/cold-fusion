@@ -20,7 +20,7 @@ component
   this.applicationTimeout = createTimeSpan(0, 0, 30, 0);
 
   public boolean function onApplicationStart() {
-    application.baseUrl = "http://127.0.0.1:2020/subsite";
+    APPLICATION.baseUrl = "http://127.0.0.1:2020/subsite";
     return true;
   }
 }
