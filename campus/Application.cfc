@@ -10,6 +10,8 @@ component
 			driver = "Apache Derby Embedded"
 		}
 	}
+
+  this.customtagpaths = expandPath('./custom');
   
   this.clientManagement = true;
 	this.setClientCookie = true;
