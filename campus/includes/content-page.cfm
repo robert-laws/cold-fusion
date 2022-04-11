@@ -5,6 +5,7 @@
     include "./copyright.cfm";
   }
 
+  // User Component
   campusUser = new com.User("Hal");
   writeOutput(campusUser.getUsername());
   
