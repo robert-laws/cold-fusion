@@ -1,4 +1,16 @@
-<cfoutput>
+<cfscript>
+  if(structKeyExists(url, "name")) {
+    include "./contact.cfm";
+  } else {
+    include "./copyright.cfm";
+  }
+
+  campusUser = new com.User("Hal");
+  writeOutput(campusUser.getUsername());
+  
+</cfscript>
+
+<!--- <cfoutput>
   <div class="l-wrapper">
     <div class="site-grid site-grid__wrapper site-grid__layout site-grid__layout--sidebar-horizontal">
       <div class="site-grid__col">
@@ -14,4 +26,4 @@
     </div>
   </div>
         
-</cfoutput>
+</cfoutput> --->

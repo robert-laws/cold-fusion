@@ -8,7 +8,6 @@
         </ul> --->
         <cf_breadcrumbs crumbs="#["About St. Olaf", "About"]#" />
 
-
         <div class="page-content t-content">
           <h1>About St. Olaf College</h1>
           <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vero quasi voluptatem ipsam molestias, officia consequuntur quod rem aspernatur aliquid? Temporibus accusantium velit nisi!</p>
