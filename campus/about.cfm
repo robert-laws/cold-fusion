@@ -2,12 +2,13 @@
   <div class="l-wrapper">
     <div class="site-grid site-grid__wrapper site-grid__layout site-grid__layout--sidebar-horizontal">
       <div class="site-grid__col">
-        <ul class="breadcrumbs">
+        <!--- <ul class="breadcrumbs">
           <li class="menu-item">About St. Olaf</li>
           <li class="menu-item">About</li>
-        </ul>
+        </ul> --->
+        <cf_breadcrumbs crumbs="#["About St. Olaf", "About"]#" />
 
-        <!-- CF_WPLAYOUT_CONTENT_START -->
+
         <div class="page-content t-content">
           <h1>About St. Olaf College</h1>
           <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vero quasi voluptatem ipsam molestias, officia consequuntur quod rem aspernatur aliquid? Temporibus accusantium velit nisi!</p>

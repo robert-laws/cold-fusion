@@ -25,4 +25,9 @@ component
     APPLICATION.baseUrl = "http://127.0.0.1:2020/subsite";
     return true;
   }
+
+  // public void function onRequest(string targetPage) {
+  //   REQUEST.currentPageTitle = "History and Heritage";
+  //   include arguments.targetPage;
+  // }
 }
