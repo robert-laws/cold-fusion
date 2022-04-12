@@ -1,3 +1,5 @@
+<cfimport taglib="../myCustomTags" prefix="mct">
+<mct:basicContent greeting="Hello there..." />
 <cfscript>
   if(structKeyExists(url, "name")) {
     include "./contact.cfm";

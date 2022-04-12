@@ -1,4 +1,6 @@
 <cfscript>
+  // request.siteLocation = "Central Zone";
+  // request.myName = "Bob Cobb";
   cfparam(name="attributes.pageTitle", default="Campus Website");
 
   if(!thisTag.hasEndTag) {

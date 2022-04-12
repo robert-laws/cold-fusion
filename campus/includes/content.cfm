@@ -7,7 +7,9 @@
         <li class="menu-item">History and Heritage</li> --->
         <cf_breadcrumbs crumbs="#["About St. Olaf College", "Tradition", "History and Heritage"]#" />
 
-
+        <cfscript>
+          writeoutput(hero_title);
+        </cfscript>
       <!-- CF_WPLAYOUT_CONTENT_START -->
       <div class="page-content t-content">
         <p>

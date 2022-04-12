@@ -26,6 +26,8 @@ component
     return true;
   }
 
+  request.currentTime = now()
+
   // public void function onRequest(string targetPage) {
   //   REQUEST.currentPageTitle = "History and Heritage";
   //   include arguments.targetPage;

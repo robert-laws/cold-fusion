@@ -20,6 +20,8 @@
 </cfscript>
 
 <cfoutput>
+  <cfmodule template="../myCustomTags/personalData.cfm" myName="Hal">
+  <p>Current Time: #request.currentTime#</p>
   <ul class="breadcrumbs">
     <!--- <li class="menu-item"></li> --->
     #getCrumbs(attributes.crumbs)#
