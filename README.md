@@ -193,6 +193,17 @@ writeDump(var = employee, label = "Employee Information");
 
 ## Variables and Datatypes
 
+Variables are used to store different data types for use in coldfusion applications. Major data types are:
+
+- String
+- Integers
+- Booleans
+- Arrays
+- Structures
+- Query
+- Lists (String)
+- Dates (String)
+
 #### Creating simple variables
 
 ```cfml
@@ -290,27 +301,207 @@ writeDump(items);
 
 #### Finding items in an array
 
+```cfml
+items = ["pen", "pencil", "notebook", "eraser", "chalkboard", "paper"];
+writeOutput(ArrayFirst(items)); // pen
+writeOutput(items.first()); // pen
+
+writeOutput(ArrayLast(items)); // paper
+writeOutput(items.last()); // paper
+
+writeOutput(ArrayFind(items, "eraser")); // 4
+writeOutput(items.find("eraser")); // 4
+
+indexPosition = ArrayFind(items, "chalk"); // 0
+indexPosition = ArrayFindNoCase(items, "chalkBOARD"); // 5
+
+indexPosition = items.find("chalk"); // 0
+indexPosition = items.findNoCase("chalkBOARD"); // 5
+
+isFound = ArrayContains(items, "chalk"); // false
+isFound = ArrayContainsNoCase(items, "chalkBOARD"); // true
+```
+
 #### Merging arrays
+
+```cfml
+items = ["pen", "pencil", "notebook", "eraser", "chalkboard", "paper"];
+stationary = ["envelope", "letter paper", "index cards"];
+
+items.append(stationary);
+writeDump(items); // merges the second array as nested array
+
+items.append(stationary, true);
+writeDump(items); // merges the second array as one flat array
+```
 
 #### Multi-dimensional arrays
 
+```cfml
+employees = ArrayNew(2);
+
+employees[1][1] = "Bob";
+employees[1][2] = "Cobb";
+employees[1][3] = "cobb@net.com";
+
+employees[2][1] = "Ned";
+employees[2][2] = "Nail";
+employees[2][3] = "nail@net.com";
+
+writeDump(employees);
+```
+
 #### Exploring Array functions
+
+```cfml
+items = ["pen", "pencil", "notebook", "eraser", "chalkboard", "paper"];
+
+items.append("envelope"); // appends an element to the end of the array
+items.prepend("cards"); // prepends an element to the beginning of the array
+items.insertAt(3, "paperclips"); // inserts an element at the specified position
+items.delete("notebook"); // deletes an element from the array
+items.deleteNoCase("PAPER"); // deletes an element from the array
+items.deleteAt(items, 5); // deletes an element from the array at the specified position
+items.clear(); // clears the array
+
+writeDump(items);
+
+numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+writeOutput(numbers.avg()); // 5.5
+writeOutput(numbers.sum()); // 55
+writeOutput(numbers.max()); // 10
+writeOutput(numbers.min()); // 1
+
+// arrays that contain numbers as strings are converted to numbers automatically
+
+itemsList = items.toList('%');
+writeDump(itemsList);
+
+newItems = itemsList.listToArray('%');
+writeDump(newItems);
+```
 
 #### Creating structures
 
+```cfml
+team = {
+  leader: "Bob Cobb",
+  manager: "Ned Nail",
+  technician: "Sally Soap",
+  accountant: "Jim Jupe"
+}
+
+team.assistant = "Mel Mope";
+writeDump(team);
+```
+
 #### About key names in structs
+
+```cfml
+person = StructNew();
+person.name = "Bob Cobb";
+person.age = 35;
+person.email = "cobb@net.com";
+person["date of birth"] = "March 23, 1985";
+writeDump(person);
+
+writeOutput(PERSON.NAME); // Bob Cobb
+writeOutput(PERSON["DATE OF BIRTH"]); // March 23, 1985
+```
 
 #### Finding items in structures
 
+```cfml
+team = {
+  leader: "Bob Cobb",
+  manager: "Ned Nail",
+  technician: "Sally Soap",
+  accountant: "Jim Jupe"
+}
+
+writeOutput(team.keyExists("leader")); // true
+writeOutput(team.keyExists("helper")); // false
+
+writeOutput(StructKeyExists(team, "leader")); // true
+writeDump(team.keyExists("manager")); // true
+
+writeDump(team.findKey("manager")); // returns array with a struct as the first element
+writeDump(team.findKey("manager"))[1].value; // returns the value for the key name
+
+writeDump(team.findValue("Ned Nail")); // returns array with a struct as the first element
+writeDump(team.findValue("Ned Nail")[1].key); // returns the key name for the value
+```
+
 #### Merging and copying structures
+
+```cfml
+company = {
+  name: "Acme Inc.",
+  ceo: "Bob Cobb"
+};
+
+address = {
+  street: "123 Main St.",
+  city: "Anytown",
+  state: "CA"
+};
+
+company.append(address);
+writeDump(company);
+
+address.state = "NY";
+writeDump(company);
+
+newCompany = {
+  name: "Acme Inc.",
+  ceo: "Bob Cobb"
+};
+
+copyOfNewCompany = newCompany.copy();
+writeDump(copyOfNewCompany);
+
+newCompany.ceo = "Hal Hope";
+writeDump(newCompany);
+writeDump(copyOfNewCompany);
+```
 
 #### Shallow Copy vs Deep Copy
 
+```cfml
+company = {
+  name: "Acme Inc.",
+  ceo: "Bob Cobb",
+  address = {
+    street: "123 Main St.",
+    city: "Anytown",
+    state: "CA"
+  }
+}
+
+company2 = company.copy(); // used for shallow copies (1 level deep)
+company2 = company.duplicate(); // used for deep copy - will create a unique version of the original
+
+company.address.state = "NY"; // structures inside of structures will create references for copies, duplicating the data
+
+writeDump(company);
+writeDump(company2);
+```
+
 #### Null Support in ColdFusion
+
+```cfml
+address = null; // not recognized by coldfusion, produces an error
+
+// null support not available by default, has to be enabled in server settings in the CF Administrator
+
+writeDump(isNull(address)); // true
+```
 
 #### Caching variables
 
 ## Main ColdFusion Constructs
+
+ColdFusion constructs include decision making and looping logic. The main decision making logic include if and switch statements.
 
 #### Simple if statement in script syntax
 
@@ -571,3 +762,19 @@ writeDump(items);
 #### DDX support in ColdFusion
 
 #### Manipulating spreadsheets in ColdFusion
+
+```
+
+```
+
+```
+
+```
+
+```
+
+```
+
+```
+
+```

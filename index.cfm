@@ -5,6 +5,11 @@
 
   <h1>Home Page</h1>
 
+  <cfscript>
+    // location = null;
+    // writeOutput(isNull(location));
+  </cfscript>
+
 <!---   <cfdump var="#REQUEST.boatsidebardatalastupdate#"> --->
 
 </cf_boat_template_sidebar>
