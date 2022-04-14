@@ -1499,8 +1499,8 @@ Calling the ORMReload() will get the ORM entities to register with the applicati
 
 #### The URL and the FORM scopes
 
-- URL scope is a structure using the fields in the URL via a GET method
-- FORM scope is a structure using the fields in the FORM via a POST method
+- URL scope is a structure transmitted in the url of the request using the fields in the URL via a GET method
+- FORM scope is a structure transmitted in the body of the request using the fields in the FORM via a POST method
 
 #### Protecting against CSRF attacks
 
