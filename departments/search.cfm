@@ -1,13 +1,14 @@
 <cfscript>
-  validate = csrfVerifyToken(key = "items", token = form.token);
-  // writeDump(form);
+  // validate = csrfVerifyToken(key = "items", token = form.token);
+  writeDump(form);
+  writeDump(url);
 
-  myToken = encodeForHTML(form.token);
-  writeOutput(myToken);
+  // myToken = encodeForHTML(form.token);
+  // writeOutput(myToken);
 
-  if(!validate) {
-    location("index.cfm", false);
-  }
+  // if(!validate) {
+  //   location("index.cfm", false);
+  // }
 
   search = "";
 

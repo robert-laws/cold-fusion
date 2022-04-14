@@ -37,6 +37,11 @@ component
 		return true;
 	}
 
+	public void function onSessionStart() {
+		session.created = now();
+		session.isLoggedIn = false;
+	}
+
 	public void function onRequest(required string targetPage) {
 		if ( !DirectoryExists( variables.dbPath ) ) 
 		{

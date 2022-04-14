@@ -174,7 +174,7 @@ Installing and configuring VS code for ColdFusion
 </cfscript>
 ```
 
-#### Using <cfdump> and writedump()
+#### Using `<cfdump>`and writedump()
 
 ```cfml
 <cfset items=["pen", "pencil", "notebook", "eraser", "paper"]>
@@ -505,151 +505,893 @@ ColdFusion constructs include decision making and looping logic. The main decisi
 
 #### Simple if statement in script syntax
 
+```cfml
+name = "Bob Cobb";
+age = 34;
+
+if(isDefined("name")) {
+  writeOutput("Hello, #name#.");
+}
+
+if(age > 30) {
+  writeOutput("You are old enough to vote.");
+} else {
+  writeOutput("You are not old enough to vote.");
+}
+```
+
 #### Nested ifs
+
+```cfml
+age = 34;
+isValid = true;
+
+if(age > 30) {
+  writeOutput("You are old enough to vote.");
+  if(isValid == true) {
+    writeOutput("You are also valid.");
+  }
+} else {
+  writeOutput("You are not old enough to vote.");
+}
+```
 
 #### Simple if statement in tag syntax
 
+<cfset manager = "Hal Hope">
+<cfoutput>
+  <cfif manager EQ "Hal Hope">
+    <p>Howdy, #manager#.</p>
+  <cfelseif manager EQ "Unknown">
+    <p>Who are you?</p>
+  <cfelse>
+    <p>Howdy, Stranger.</p>
+  </cfif>
+</cfoutput>
+
 #### Comparison operators in the tag syntax
+
+- comparison operators in tag syntax
+- EQ = equal
+- NEQ = not equal
+- GT = greater than
+- GTE = greater than or equal to
+- LT = less than
+- LTE = less than or equal to
+- AND = logical and
+- OR = logical or
 
 #### The Ternary operator
 
+```cfml
+age = 23;
+
+result = age > 18 ? "You are old enough to vote." : "You are not old enough to vote.";
+writeOutput(result);
+
+name = "Joe";
+userName = name ?: "New User";
+
+writeOutput(userName); // Joe
+```
+
 #### The switch case construct
+
+```cfml
+group = "red";
+
+switch(group) {
+  case "red":
+    writeOutput("You are in the red group.");
+    break;
+  case "blue":
+    writeOutput("You are in the blue group.");
+    break;
+  case "green":
+    writeOutput("You are in the green group.");
+    break;
+  default:
+    writeOutput("You are in no group.");
+    break;
+}
+```
 
 #### The break keyword in a switch case
 
+Bread statements in switch cases will end execution of the code and exit the switch statement.
+
+```cfml
+group = "red";
+
+switch(group) {
+  case "red":
+    writeOutput("You are in the red group.");
+    break;
+  case "blue":
+    writeOutput("You are in the blue group.");
+    break;
+  case "green":
+    writeOutput("You are in the green group.");
+    break;
+  case "multicolor":
+  case "rainbow":
+  case "all":
+    writeOutput("You are in the multicolor group.");
+    writeOutput("Please see the coordinator.");
+    break;
+  default:
+    writeOutput("You are in no group.");
+    break;
+}
+```
+
 #### If statements in switch case
+
+```cfml
+group = "red";
+age = 23;
+
+switch(group) {
+  case "red":
+    writeOutput("You are in the red group.");
+    if(age > 18) {
+      writeOutput("You can vote in the red group.");
+    }
+    break;
+  case "blue":
+    writeOutput("You are in the blue group.");
+    break;
+  default:
+    writeOutput("You are in no group.");
+    break;
+}
+```
 
 #### Reviewing the for loop
 
+The main types of loops available in CFML are:
+
+- For loop
+- While loop
+- Do ... while loop
+- For ... in loop
+
+```cfml
+for(i = 0; i < 10; i++) {
+  writeOutput("i = " & i);
+}
+```
+
 #### Reviewing the while loop and the do-while loops
+
+```cfml
+i = 10;
+
+while(i > 0) {
+  writeOutput("<p>i is #i#...</p>");
+  i--;
+}
+
+j = 0;
+
+do {
+  writeOutput("<p>j is #j#...</p>");
+  j++;
+}
+while(j < 5);
+```
 
 #### Reviewing the For In loop
 
+```cfml
+fruitBowl = ["apple", "banana", "orange", "pear", "strawberry"];
+
+for (fruit in fruitBowl) {
+  writeOutput("<p>#fruit# is in the fruit bowl.</p>");
+}
+```
+
 #### Looping over lists
+
+```cfml
+listOfLocations = "New York,Baltimore,Boston,Chicago,Dallas,Houston,Los Angeles,Miami,New Orleans,Philadelphia,Phoenix,San Antonio,San Diego,San Francisco,Seattle,Washington DC";
+
+for(city in listOfLocations) {
+  writeOutput("<p>#city# is a great city.</p>");
+}
+
+<cfloop list="#listOfLocations#" index="city">
+    <p>#city#</p>
+</cfloop>
+
+items = "apple,banana,orange,pear,strawberry";
+items.listEach(function(element, index, list) {
+  writeOutput("<p>#index#: #element# is in the fruit bowl.</p>");
+});
+```
 
 #### Looping over arrays
 
+```cfml
+fruit = ["apple", "banana", "orange", "pear", "strawberry"];
+
+<cfloop from="1" to="#ArrayLen(fruit)#" index="i">
+  <p>#fruit[i]#</p>
+</cfloop>
+
+fruit.each(function(element, index, array) {
+  writeOutput("<p>#index#: #element# is in the fruit bowl.</p>");
+});
+```
+
 #### Looping over structures
+
+```cfml
+employee = {
+  "firstName": "Bob",
+  "lastName": "Cobb",
+  "age": 34,
+  "isValid": true
+};
+
+for(key in employee) {
+  writeOutput("<p>#key#: #employee[key]#</p>");
+}
+
+employee.each(function(key, value) {
+  writeOutput("<p>Key is #key#: Value is #value#</p>");
+});
+```
 
 #### Break and continue
 
+```cfml
+items = ["apple", "banana", "orange", "pear", "strawberry", "watermelon", "grape", "peach", "pineapple", "kiwi"];
+
+for(i = 1; i <= ArrayLen(items); i++) {
+  if(i == 8) {
+    break; // break out of the loop
+  }
+  if(items[i] == "pear") {
+    continue; // skip based on the logic and continue running the loop
+  }
+  writeOutput("<p>#i#: #items[i]#</p>");
+}
+```
+
 ## ColdFusion Functions
+
+Function are used for writing reusable code and can accept arguments.
 
 #### Creating a simple function
 
+```cfml
+function greeting() {
+  writeOutput("<p>Howdy!</p>");
+}
+```
+
 #### Function arguments
+
+```cfml
+function greeting(myName) {
+  writeOutput("<p>Howdy, #arguments.myName#!</p>");
+}
+```
 
 #### Required and optional arguments
 
+```cfml
+function average(required numberOne, required numberTwo, mathType = "Average") {
+
+  var average = (arguments.numberOne + arguments.numberTwo) / 2;
+  return average;
+}
+
+writeOutput(average(20, 50));
+```
+
 #### Type checking the arguments
+
+```cfml
+function average(required numeric numberOne, required numeric numberTwo, string mathType = "Average") {
+
+  if(mathType == "Average") {
+    var average = (arguments.numberOne + arguments.numberTwo) / 2;
+  }
+  return average;
+}
+
+writeOutput(average(20, 50));
+```
 
 #### Passing arguments into functions
 
+```cfml
+function average(required numeric numberOne, required numeric numberTwo, required numeric numberThree) {
+  var average = (arguments.numberOne + arguments.numberTwo) / 2;
+  return average;
+}
+
+myNumbers = {
+  numberOne: 20,
+  numberTwo: 50,
+  numberThree: 80
+};
+
+writeOutput(average(argumentCollection = myNumbers));
+```
+
 #### Returning data from a function
+
+```cfml
+numeric function add(required numeric numberOne, required numeric numberTwo) {
+  return arguments.numberOne + arguments.numberTwo;
+}
+
+void function greeting(required string myName) {
+  writeOutput("<p>Howdy, #arguments.myName#!</p>");
+}
+
+writeOutput(add(20, 50));
+greeting("Bob");
+```
 
 #### Creating functions with tags
 
+```cfml
+<cffunction name="getAverage" returntype="numeric">
+  <cfargument name="numberOne" type="numeric" required="true" />
+  <cfargument name="numberTwo" type="numeric" required="true" />
+
+  <cfset var average = (arguments.numberOne + arguments.numberTwo) / 2 />
+
+  <cfreturn average />
+</cffunction>
+
+<cfoutput>
+  <p>The average is #getAverage(34, 64)#.</p>
+</cfoutput>
+```
+
 ## Scopes
+
+Scopes define where variables are available. They exist as structures. Scopes can either be for short-term use or persistent and available over multiple requests, sessions, applications, and more. They are helpful in cases of performance, security, and convenience in app development.
 
 #### About scopes in general
 
+There are approximately 20 different types of scopes in ColdFusion.
+
 #### The default variables scope
+
+Using the `variables` scope is recommended for performance reasons and to avoid conflicts with variables using the same name in other scopes.
 
 #### The var scope of a function
 
+Using the `var` keyword in a function will scope it only to the function and not outside of the function. The concept of encapsulation stresses to keep variables scoped only as needed.
+
+```cfml
+variables.firstName = "Bob";
+variables.lastName = "Cobb";
+
+string function greet() {
+  var greeting = "Howdy"; // this variable is scoped to the function
+  var firstName = "Kalvin";
+
+  return "#greeting#, #local.firstName# #variables.lastName#";
+}
+```
+
 #### The CGI Scope
+
+CGI scope is data from the web server and is read-only. Some useful information includes:
+
+- HTTP_USER_AGENT
+- REQUEST_METHOD
 
 #### The Application.cfc file
 
+ColdFusion looks for a `Application.cfc` file when it initializes an application. Multiple Application.cfc files can be used to establish distinct applications within a single file system. Application.cfc can be in a parent folder and only one Application.cfc file is executed per application.
+
 #### The older Application.cfm file
+
+Before CF7, Application.cfm file was used, but it is deprecated and not recommended for modern development. If an Application.cfc file and Application.cfm are both in the file system, CF will only use the .cfc file.
 
 #### The Application scope
 
+ColdFusion has several persistent scopes that are available between pages and requests. The application scope is named using the `this.name` assignment. Each application should have a unique name to avoid conflicts. It's populated when the first request is made to the application server and is removed at the default or specified application timeout.
+
 #### The Session scope
+
+Session scope is available only to a specific user. Each user can have unique values that are stored per session.
 
 #### Session Identifiers and the Cookie scope
 
+The session values `cfid` and `cftoken` are important and are used with the session and cookie scopes for identification. If CF finds a match, it can resume an existing session. The cookie scope can be used to store data too, which are available through the cookie scope.
+
 #### The Server Scope
+
+The server scope is available to all users and across all applications. This provides information about the ColdFusion server, its operating system, and features available in ColdFusion. It's possible to write to the server scope and access this data in other applications.
 
 #### Locking
 
+ColdFusion is a multithreaded application - 10 requests at the same time, all 10 requests are processed at the same time. There are circumstances where multiple users could attempt to change data in the application scope at the same time, causing a conflict. To avoid this, the application scope can be locked when a request is made. A user who attempts to update a value that is locked will have to wait until the lock is released. This is called a race condition.
+
+Two options are available:
+
+- type="exclusive" - used when writing is needed
+- type="read only" - used when only read access to a shared variable is needed
+
+```cfml
+lock scope="Application" timeout="10" type="Exclusive"
+{
+  application.totalTicketsSold = application.totalTicketsSold + myNewTicketsOrder;
+}
+```
+
+Locks are recommended only when a race condition is possible. Locking can also be used in session, server, or application variables.
+
+using `cfthread` also is a situation where locking is helpful.
+
 ## Reusing Code
+
+ColdFusion offers several options for reusing code.
 
 #### Using simple <cfinclude>
 
+Provides a way to bring in CF pages
+
+```cfml
+<cfinclude template="inc/header.cfm" />
+
+include template="inc/footer.cfm"
+```
+
 #### <cfinclude> and the variables scope
+
+Variables created in one CF page can be used in another CF page when imported. These variable are visible through the variables scope.
 
 #### Use cases for cfincludes
 
+When using constants in an application, use of a CF includes can be helpful. The constants can be created in an include and used in another coldfusion page. Functions can also be accessed when included from another CF file, which can be useful when reusing and organizing code.
+
 #### Using cfinclude with functions
+
+Be careful of the names used in functions since they can be overwritten when a function name is duplicated.
 
 #### When cfinclude is not a good idea
 
+CF includes are not useful when multiple cf files are nested and makes the code difficult to follow and maintain.
+
 #### Custom tags with <cfimport>
+
+In situations where pages involve some logic and processing, cfimport can be a better solution than cfinclude. There are multiple ways to import a custom tag file.
+
+```cfml
+<cfimport taglib="myCustomTags" prefix="mct">
+
+<mct:header>
+<main>
+  Content
+</main>
+<mcf:footer>
+```
 
 #### Opening and closing custom tags
 
+Custom tags include support for opening and closing tags, which will run the tag body both when the tag is opened and when it is closed. To address this behavior, it's possible to manage the tag behavior using the `thisTag` scope.
+
+```cfml
+<cfif thisTag.executionMode EQ "start">
+  <p>Tag Start</p>
+<cfelse>
+  <p>Tag End</p>
+</cfif>
+```
+
+This can also be done in cfscript.
+
+```cfml
+if(thisTag.executionMode == "start") {
+  writeOutput(attributes.greeting ?: "Welcome...");
+  exit "exittemplate";
+}
+
+if(thisTag.executionMode == "end") {
+  writeOutput("goodbye");
+  exit "exittag";
+}
+```
+
 #### Passing attributes to custom tags
+
+Custom tags provide support for passing data or attributes to the tag caller.
+
+```cfml
+<mct:header pageTitle="Welcome Page">
+
+<cfparam name="attributes.pageTitle" default="Website Page Title" />
+<title>#attributes.pageTitle#</title>
+```
 
 #### The request scope
 
-#### Custom tags with <cfmodule>
+In custom tags, the variable scope is not shared. In this situation, the request scope is a good option since it's shared among all pages in an application. It's automatically created at the beginning of a request and disposed at the end of a request.
 
-#### Custom tags with the <cf\_> syntax
+```cfml
+<p>#REQUEST.siteTitle#</p>
+```
+
+#### Custom tags with `<cfmodule>`
+
+Another way to use custom tags is with the cfmodule tag.
+
+```cfml
+<cfmodule template="myCustomTags/header.cfm" pageTitle="Contact Page">
+```
+
+#### Custom tags with the `<cf_>` syntax
+
+If the custom tags path is specified in the CF Server Administration site or the Application.cfc file, the `<cf_>` syntax can be used to import the custom tags.
+
+````cfml
+<cf_header pageTitle="User Account Page">
 
 #### The Application Framework
 
-#### The main app framework variables
+One folder structure can have multiple Application.cfc files to establish distinct applications. The file needs to include specific values for the application and other configurations like folder mappings and datasources.
 
-#### Include non .cfm files
+```cfml
+component
+{
+  this.name = "myBusinessApp";
+}
+````
 
 #### onApplicationStart() and onSessionStart()
 
+ColdFusion fires several events when an application is started. When an app first starts, it will fire the onApplicationStart() event. When a user starts a session, it will fire the onSessionStart() event.
+
+```cfml
+public boolean function onApplicationStart()
+{
+  application.siteEmailAddress = "site@net.com";
+  return true;
+}
+```
+
 #### Request event handlers
+
+```cfml
+function onRequest(string targetPage) {
+  try {
+    include arguments.targetPage;
+  }
+  catch(e) {
+    writeOutput("Error: " & e.message);
+  }
+}
+```
 
 #### onsessionEnd() and on ApplicationEnd()
 
+onSessionEnd will run when the session has run out and already ended. Two arguments passed can provide information about the expired session.
+
+```cfml
+function onSessionEnd(struct SessionScope, struct ApplicationScope) {
+  // do something with the copy of the session or application scope
+}
+```
+
 #### Other event handlers
 
+- onError - function onError(any Exception, string EventName)
+- onMissingTemplate - public boolean function onMissingTemplate(required string targetPage)
+
 #### Using cfInclude in Application.cfc
+
+The Application.cfc can use includes to reference files that have the application lifecycle methods.
 
 ## Basic Database Operations
 
 #### Creating a DSN
 
+Using the ColdFusion Server Administration site, you can create a DSN. A DSN requires a name, a database driver, server, port, and username and password.
+
+```cfml
+this.datasources = {
+  AppDataSource = {
+    url = "jdbc:derby:#variables.dbPath#;create=true;MaxPooledStatements=100",
+    driver = "Apache Derby Embedded"
+  }
+}
+```
+
 #### Using CFquery
+
+```cfml
+<cfquery name="allUsers" datasource="AppDataSource">
+  SELECT * FROM users;
+</cfquery>
+```
 
 #### This.datasource in Application.cfc
 
+```cfml
+this.datasource = "AppDataSource";
+```
+
+```cfml
+<cfquery name="allUsers">
+  SELECT * FROM users
+</cfquery>
+```
+
 #### Displaying Query Data
+
+```cfml
+<cfoutput>
+  <cfloop query="allUsers">
+    <p>#FirstName#</p>
+  </cfloop>
+</cfoutput>
+
+<cfoutput query="users">
+  <p>#LastName#</p>
+</cfoutput>
+```
 
 #### Grouping Query output
 
+```cfml
+<cfquery name="allUsers">
+  SELECT * FROM users ORDER BY department
+</cfquery>
+
+<cfoutput query="allUsers" group="department">
+  <p>#department#</p>
+  <ul>
+    <cfoutput>
+      <li>#FirstName#</li>
+    </cfoutput>
+  </ul>
+</cfoutput>
+```
+
 #### Creating dynamic queries
+
+```cfml
+<cfoutput query="allUsers">
+  <p><a href="user-details/#username#">#FirstName# #LastName#</a></p>
+</cfoutput>
+```
 
 #### Using Query parameters
 
+````cfml
+<cfquery name="allUsers" result="allUsersResult">
+  SELECT FirstName, LastName
+  FROM Users
+  WHERE UserID = <cfqueryparam value="#url.userId#" cfsqltype="cf_sql_integer">
+</cfquery>
+
 #### Query metadata
+
+Queries have metadata that is included in the query result. This data includes things like record count, column names, and sql expressions used.
 
 #### Using queryexecute()
 
+```cfml
+<cfscript>
+  sql = "SELECT * FROM users";
+  queryUsers = queryexecute(sql);
+</cfscript>
+
+<cfoutput query="queryUsers">
+  <p>#FirstName#</p>
+</cfoutput>
+````
+
+```cfml
+<cfscript>
+  sql = "SELECT * FROM users WHERE UserID = ?";
+  params = [{value = url.userId, cfsqltype = "cf_sql_integer"}];
+  options = {results = "queryUsersResult"};
+
+  queryDetails = queryExecute(sql, params, options);
+</cfscript>
+
+<cfoutput>
+  <p>#queryDetails.FirstName#</p>
+</cfoutput>
+```
+
+```cfml
+<cfscript>
+  sql = "SELECT * FROM users WHERE UserID = :userID";
+  params = { userID = }{value = url.userId, cfsqltype = "cf_sql_integer"}};
+  options = {results = "queryUsersResult"};
+
+  queryDetails = queryExecute(sql, params, options);
+</cfscript>
+
+<cfoutput>
+  <p>#queryDetails.FirstName#</p>
+</cfoutput>
+```
+
 #### Caching queries
+
+```cfml
+<cfquery name="allUsers" result="allUsersResult" cachedwithin="#createTimeSpan(0, 0, 5, 0)#">
+  SELECT FirstName, LastName
+  FROM Users
+</cfquery>
+
+<cfscript>
+  sql = "SELECT * FROM users WHERE UserID = :userID";
+  params = { userID = }{value = url.userId, cfsqltype = "cf_sql_integer"}};
+  options = {results = "queryUsersResult", cachedwithin = "#createTimeSpan(0, 0, 5, 0)#"};
+
+  queryDetails = queryExecute(sql, params, options);
+</cfscript>
+```
 
 #### Queries of queries
 
+```cfml
+<cfquery name="allUsers" result="allUsersResult" cachedwithin="#createTimeSpan(0, 0, 5, 0)#">
+  SELECT FirstName, LastName
+  FROM Users
+</cfquery>
+
+<cfquery name="userDetail" result="queryUserDetail" dbtype="query">
+  SELECT *
+  FROM allUsers
+  WHERE UserID = <cfqueryparam value="#url.userId#" cfsqltype="cf_sql_integer">
+</cfquery>
+```
+
 #### Using the ValueList() function
 
+Convert data from a query to a list.
+
+```cfml
+<cfquery name="allUsers" result="allUsersResult" cachedwithin="#createTimeSpan(0, 0, 5, 0)#">
+  SELECT FirstName, LastName
+  FROM Users
+  ORDER BY LastName
+</cfquery>
+
+<cfoutput>
+  #valueList(allUsers.LastName, " - ")#
+</cfoutput>
+```
+
 #### Other tags for creating queries
+
+```cfml
+<cfdirectory directory="#expandPath('../')#" action="list" name="queryDirectory" recurse="true" sort="directory asc, name asc" />
+
+<cfldap server="some.ldap.server" action="query" name="ldap" start="">
+```
 
 #### Object Oriented Programming in ColdFusion
 
 ## Creating Components
 
+```cfml
+// Employee.cfc
+component
+{
+  variables.userName = "";
+  variables.age = "";
+  variables.userId = "";
+
+  public any function init(string userName = '', numeric age = 0) {
+    setUserName(arguments.userName);
+    setAge(arguments.age);
+    setUserId();
+    return this;
+  }
+
+  // setters (mutators)
+  public void function setUserName(string userName) {
+    variables.userName = userName;
+  }
+
+  public void function setAge(numeric age) {
+    variables.age = age;
+  }
+
+  public void function setUserId(numeric userId) {
+    variables.userId = randRange(1, 100);
+  }
+
+  // getters (accessors)
+  public string function getUserName() {
+    return variables.userName;
+  }
+
+  public numeric function getAge() {
+    return variables.age;
+  }
+
+  public void function displayUserInfo() {
+    writeOutput("<p>Name: #getUserName()#</p>");
+    writeOutput("<p>Age: #getAge()#</p>");
+  }
+
+  private string function getUserId() {
+    return variables.userId;
+  }
+}
+```
+
+```cfml
+employee = new components.Employee("halhope", 30);
+employee.displayUserInfo();
+```
+
 #### Methods in components
+
+```cfml
+abstract component accessors="true"
+{
+  property name="vehicleName" type="string";
+  property name="age" type="numeric";
+
+  public any function init(string name, numeric age) {
+    setVehicleName(name);
+    setAge(age);
+    return this;
+  }
+
+  public void function setAge(numeric age) {
+    if(age < 1 || age > 100) {
+      throw(message = "Invalid age for vehicle");
+    } else {
+      variables.age = age;
+    }
+  }
+
+  public string function displayInfo() {
+    return "Vehicle Name: " & getVehicleName() & "; Age: " & getAge();
+  }
+}
+```
 
 #### Creating component instances
 
+```cfml
+myCar = new com.Vehicle("Karma Vehicle", 3);
+myBicycle = new com.Vehicle("Commuter Vehicle", 4);
+```
+
 #### The constructor method
+
+```cfml
+component accessors="true"
+{
+  property name="Provider" type="string";
+  property name="Copay" type="numeric";
+  property name="Deductable" type="numeric";
+
+  public any function init(provider, copay, deductable) {
+    setProvider(provider);
+    setCopay(copay);
+    setDeductable(deductable);
+
+    return this;
+  }
+
+  public void function showPlanDetails() {
+    writeOutput("<p>Provider: #getProvider()#</p>");
+    writeOutput("<p>Copay: #getCopay()#</p>");
+    writeOutput("<p>Deductable: #getDeductable()#</p>");
+  }
+}
+```
 
 #### Understanding components, instances and objects
 
@@ -663,7 +1405,7 @@ ColdFusion constructs include decision making and looping logic. The main decisi
 
 #### Overriding the implicit accessors
 
-#### Using the Getter and setter attributes of the <cfproperty> tag
+#### Using the Getter and setter attributes of the `<cfproperty>` tag
 
 #### Inheritance : the "is a" relationship
 
@@ -673,7 +1415,7 @@ ColdFusion constructs include decision making and looping logic. The main decisi
 
 #### Multi-level inheritance
 
-#### Using Abstract componentd
+#### Using Abstract components
 
 #### Inheritance best practices
 
@@ -703,11 +1445,37 @@ ColdFusion constructs include decision making and looping logic. The main decisi
 
 #### Caching in the session scope
 
+#### Caching a variable
+
+```cfml
+cachePut('MyWebsite', mySite);
+mySite = cacheGet('MyWebsite');
+```
+
 ## An introduction TO ORM
+
+HQL - Hibernate Query Language
 
 #### Enabling ColdFusion ORM
 
+- this.ormEnabled = true;
+- this.ormSettings.dialect = "Derby";
+- this.ormSettings.cfclocation = "./com";
+
 #### Building a simple ORM entity
+
+```cfml
+// User.cfc
+component persistent="true" table="tUsers"
+{
+  property name="userID" fieldType="id" generator="native" setter="false";
+  property name="firstName" ormType="text";
+  property name="lastName" ormType="text";
+  property name="email" ormType="text";
+}
+```
+
+Calling the ORMReload() will get the ORM entities to register with the application.
 
 #### Creating and displaying ORM data
 
@@ -731,7 +1499,28 @@ ColdFusion constructs include decision making and looping logic. The main decisi
 
 #### The URL and the FORM scopes
 
+- URL scope is a structure using the fields in the URL via a GET method
+- FORM scope is a structure using the fields in the FORM via a POST method
+
 #### Protecting against CSRF attacks
+
+```cfml
+// form-page.cfm
+<form name="searchForm" action="search.cfm" method="post">
+  <input type="hidden" name="token" value="#csrfGenerateToken(key = "items", forceNew = true)#" />
+  <input type="text" name="searchTerm" />
+  <input type="submit" value="Search" />
+</form>
+
+// search.cfm
+validate = csrfVerifyToken(key = "items", token = form.token);
+
+myToken = encodeForHTML(form.token);
+
+if(!validate) {
+  location("index.cfm", false);
+}
+```
 
 #### Logging In users in and out
 
@@ -762,6 +1551,54 @@ ColdFusion constructs include decision making and looping logic. The main decisi
 #### DDX support in ColdFusion
 
 #### Manipulating spreadsheets in ColdFusion
+
+```
+
+```
+
+```
+
+```
+
+```
+
+```
+
+```
+
+```
+
+```
+
+```
+
+```
+
+```
+
+```
+
+```
+
+```
+
+```
+
+```
+
+```
+
+```
+
+```
+
+```
+
+```
+
+```
+
+```
 
 ```
 
