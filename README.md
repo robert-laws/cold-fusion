@@ -1311,15 +1311,94 @@ component accessors="true"
 
 #### Overriding the implicit accessors
 
+The implicit accessors will set the values, but don't provide any way to validate incoming data. Providing a setter method with the same name as the generated accessors methods will override the implicit accessors.
+
+```cfml
+component accessors="true"
+{
+  property name="firstName" type="string";
+  property name="age" type="numeric";
+
+  public any function init(string firstName, numeric age) {
+    setFirstName(arguments.firstName);
+    setAge(arguments.age);
+
+    return this;
+  }
+
+  public void function setAge(numeric newAge) {
+    if(arguments.newAge > 1 || arguments.newAge < 100) {
+      throw(message = "age is an invalid number");
+      abort;
+    } else {
+      variables.age = arguments.newAge;
+    }
+  }
+}
+```
+
 #### Using the Getter and setter attributes of the `<cfproperty>` tag
+
+```cfml
+property name="authorID" type="uuid" getter="true" setter="false"; // allows explicit getter/setter generation per property
+```
 
 #### Inheritance : the "is a" relationship
 
+Components that share properties and methods can use inheirtance to share code. The concept is that a component "is a" component.
+
+For example, a bicycle and a car "is a" type of vehicle. They could both make use of vehicle properties they have in common and only possess unique properties in their own components.
+
 #### Using the extends attribute
+
+Bicycle.cfc
+
+```cfml
+component extends="Vehicle"
+{
+  // code for Bicycle goes here
+}
+```
 
 #### The super keyword
 
+```cfml
+// Vehicle.cfc
+component accessors="true"
+{
+  property name="firstName" type="string";
+  property name="age" type="numeric";
+
+  public any function init(name, age) {
+    setName(arguments.name);
+    setAge(arguments.age);
+
+    return this;
+  }
+
+  public any function showInfo() {
+    writeOutput("<p>Name: #getName()#</p>");
+    writeOutput("<p>Age: #getAge()#</p>");
+  }
+}
+
+// Bicycle.cfc
+component accessors="true" extends="Vehicle"
+{
+  property name="bellType" type="string";
+
+  public any function init(name, age, bellType) {
+    super.init(arguments.name, arguments.age);
+    setBellType(arguments.bellType);
+
+    return this;
+  }
+}
+```
+
 #### Multi-level inheritance
+
+Multi-level inheritance is possible, but can lead to confusion if overdone.
 
 #### Using Abstract components
 
@@ -1329,15 +1408,45 @@ component accessors="true"
 
 #### Advanced composition
 
+An employee has a insurance plan. And a department has an employee (or many employees). This is multi-level composition.
+
 #### Using composition and inheritances in an application
 
 #### Understanding the use of interfaces
 
+There are instances when a component has similar properties and methods as a base component, but need to implement the methods in a different way. Interfaces allow flexibility in implementation of a component to allow this behavoir.
+
 #### Creating interfaces
+
+The interface will define rules that will govern the implementation of methods in a component.
+
+```cfml
+// ISwimmable.cfc
+interface
+{
+  public void function swim();
+}
+```
 
 #### Using interfaces
 
+```cfml
+component extends="Duck" implements="ISwimmable"
+{
+  public any function init() {
+    super.init();
+    return this;
+  }
+
+  public void function speak() {
+    writeOutput("<p>Quack!</p>");
+  }
+}
+```
+
 #### What interfaces do
+
+Interfaces enforce the implementation of methods within a component. The methods defined in an interface have specific signatures and return types that must be followed to be valid.
 
 #### Using interfaces with multiple components
 
@@ -1349,7 +1458,26 @@ component accessors="true"
 
 #### Caching component instances in the application scope
 
+Steps for using components
+
+- create an instance and invoke the init() function = done using the new keyword
+- use the component instance
+
+Caching objects in the application scope will allow you provide quick access to the object when users go to the website. Singleton methodology.
+
+```cfml
+public boolean function onApplicationStart()
+{
+  application.objMovie = new model.Movie();
+  return true;
+}
+```
+
 #### Caching in the session scope
+
+```cfml
+session.info = myDetails;
+```
 
 #### Caching a variable
 
