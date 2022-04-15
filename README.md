@@ -1,5 +1,14 @@
 # Cold Fusion Application - Basics
 
+Useful Resources:
+
+- [cfscript.me](https://cfscript.me)
+- [cffiddle](https://cffiddle.org)
+- [cfdocs](https://cfdocs.org)
+- [Learn CF in a Week](http://www.learncfinaweek.com)
+- [Adobe Cold Fusion](https://helpx.adobe.com/support/coldfusion.html)
+- [ColdFusion Functions by Category](https://helpx.adobe.com/coldfusion/cfml-reference/coldfusion-functions/functions-by-category.html)
+
 ### Application.cfc
 
 Application.cfc file governs the settings for an application. It's possible to add Application.cfc files to subdirectories of a webroot to create distinct applications at those locations.
